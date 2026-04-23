@@ -39,14 +39,18 @@ jobs:
           curl -L https://github.com/cloudfoundry/cli/releases/download/v8.8.0/cf8-cli_8.8.0_linux_x86-64.tgz -o cf.tgz
     
           tar -xzf cf.tgz
-          chmod +x cf
 
-          sudo mv cf /usr/local/bin/
+          # 🔍 See what got extracted
+          ls -l
 
-          # Persist PATH
+          # Usually binary is inside folder → move correctly
+          CF_BINARY=$(find . -type f -name cf | head -n 1)
+
+          chmod +x $CF_BINARY
+          sudo mv $CF_BINARY /usr/local/bin/cf
+
           echo "/usr/local/bin" >> $GITHUB_PATH
 
-          # Debug
           which cf
           cf version
 
