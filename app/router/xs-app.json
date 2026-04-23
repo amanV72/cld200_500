@@ -1,0 +1,27 @@
+{
+  "routes": [
+    {
+      "source": "^/odata/(.*)$",
+      "target": "/odata/$1",
+      "destination": "srv-api",
+      "csrfProtection": true
+    },
+    {
+      "source": "^/employees/(.*)$",
+      "target": "/$1",
+      "destination": "employees-crud-ui",
+      "authenticationType": "xsuaa"
+    },
+    {
+      "source": "^/customers/(.*)$",
+      "target": "/$1",
+      "destination": "customers",
+      "authenticationType": "xsuaa"
+    },
+    {
+      "source": "^/$",
+      "target": "/employees/index.html",
+      "destination": "employees-crud-ui"
+    }
+  ]
+}
