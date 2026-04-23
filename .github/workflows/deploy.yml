@@ -36,14 +36,17 @@ jobs:
       # ✅ FIXED: CF install + persist PATH
       - name: Install Cloud Foundry CLI
         run: |
-          wget -q -O cf8.tgz "https://packages.cloudfoundry.org/stable?release=linux64-binary&source=github"
-          tar -xzf cf8.tgz
+          curl -L https://github.com/cloudfoundry/cli/releases/download/v8.8.0/cf8-cli_8.8.0_linux_x86-64.tgz -o cf.tgz
+    
+          tar -xzf cf.tgz
           chmod +x cf
+
           sudo mv cf /usr/local/bin/
 
-          # 🔥 IMPORTANT: persist for next steps
+          # Persist PATH
           echo "/usr/local/bin" >> $GITHUB_PATH
 
+          # Debug
           which cf
           cf version
 
