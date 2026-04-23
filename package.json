@@ -16,6 +16,8 @@
     "mbt": "^1.2.29",
     "rimraf": "^5.0.5"
   },
+
+  
   "scripts": {
     "start": "cds-serve",
     "watch-employees-crud-ui": "cds watch --open com.employee.employeescrudui/index.html?sap-ui-xx-viewCache=false --livereload false",
