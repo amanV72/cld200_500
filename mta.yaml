@@ -61,32 +61,6 @@ modules:
           url: ~{srv-url}
           forwardAuthToken: true
 
-  # 🔹 Employees UI
-  - name: employees-crud-ui
-    type: html5
-    path: app/employees-crud-ui
-    build-parameters:
-      builder: custom
-      commands:
-        - npm install
-        - npm run build
-      build-result: dist
-    requires:
-      - name: html5-repo-host
-
-  # 🔹 Customers UI
-  - name: customers
-    type: html5
-    path: app/customers-crud-ui
-    build-parameters:
-      builder: custom
-      commands:
-        - npm install
-        - npm run build
-      build-result: dist
-    requires:
-      - name: html5-repo-host
-
 resources:
 
   # 🔹 HANA DB
