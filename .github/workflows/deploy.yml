@@ -34,13 +34,13 @@ jobs:
         run: mbt build
 
       # ✅ FIXED: Reliable CF CLI installation
-      - name: Install Cloud Foundry CLI
-        run: |
-          curl -L https://github.com/cloudfoundry/cli/releases/download/v8.7.10/cf8-linux-amd64.tgz -o cf.tgz
-          tar -xzf cf.tgz
-          chmod +x cf
-          sudo mv cf /usr/local/bin/
-          cf version
+       - name: Install Cloud Foundry CLI
+         run: |
+          wget -q -O cf8.tgz "https://packages.cloudfoundry.org/stable?release=linux64-binary&source=github"
+          tar -xzf cf8.tgz
+          chmod +x ./cf
+          ./cf version
+          sudo mv cf /usr/local/bin/cf
 
       # ✅ FIXED: Plugin installation works now
       - name: Install MultiApps plugin
