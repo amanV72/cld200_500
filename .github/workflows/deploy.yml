@@ -33,30 +33,34 @@ jobs:
       - name: Build MTA archive
         run: mbt build
 
-      # ✅ FIXED: Reliable CF CLI installation
+      # ✅ FIXED: CF install + persist PATH
       - name: Install Cloud Foundry CLI
         run: |
           wget -q -O cf8.tgz "https://packages.cloudfoundry.org/stable?release=linux64-binary&source=github"
           tar -xzf cf8.tgz
-          chmod +x ./cf
-          ./cf version
-          sudo mv cf /usr/local/bin/cf
+          chmod +x cf
+          sudo mv cf /usr/local/bin/
 
-      # ✅ FIXED: Plugin installation works now
+          # 🔥 IMPORTANT: persist for next steps
+          echo "/usr/local/bin" >> $GITHUB_PATH
+
+          which cf
+          cf version
+
+      # ✅ Now this will work
       - name: Install MultiApps plugin
         run: |
           cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
           cf install-plugin multiapps -f
           cf plugins
 
-      # ✅ FIXED: Login (with SSL skip for BTP trial)
+      # ✅ Slight improvement for BTP trial
       - name: Login to Cloud Foundry
         run: |
-          cf api "${{ secrets.CF_API }}"
+          cf api "${{ secrets.CF_API }}" --skip-ssl-validation
           cf auth "${{ secrets.CF_USERNAME }}" "${{ secrets.CF_PASSWORD }}"
           cf target -o "${{ secrets.CF_ORG }}" -s "${{ secrets.CF_SPACE }}"
 
-      # ✅ Deploy
       - name: Deploy MTA to Cloud Foundry
         run: |
           cf deploy mta_archives/employee-crud-app_1.0.0.mtar -f
