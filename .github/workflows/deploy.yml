@@ -40,15 +40,11 @@ jobs:
     
           tar -xzf cf.tgz
 
-          # 🔍 See what got extracted
-          ls -l
+          # ✅ use actual binary
+          chmod +x cf8
+          sudo mv cf8 /usr/local/bin/cf
 
-          # Usually binary is inside folder → move correctly
-          CF_BINARY=$(find . -type f -name cf | head -n 1)
-
-          chmod +x $CF_BINARY
-          sudo mv $CF_BINARY /usr/local/bin/cf
-
+          # persist PATH
           echo "/usr/local/bin" >> $GITHUB_PATH
 
           which cf
