@@ -48,9 +48,9 @@ jobs:
 
       - name: Login to Cloud Foundry
         run: |
-          cf api "${{ secrets.https://api.cf.ap21.hana.ondemand.com }}"
-          cf auth "${{ secrets.varmaaman1078@gmail.com }}" "${{ secrets.Aman200427$ }}"
-          cf target -o "${{ secrets.c2ed3a69trial }}" -s "${{ secrets.dev }}"
+          cf api "${{ https://api.cf.ap21.hana.ondemand.com }}"
+          cf auth "${{ varmaaman1078@gmail.com }}" "${{ Aman200427$ }}"
+          cf target -o "${{ c2ed3a69trial }}" -s "${{ dev }}"
 
       - name: Deploy MTA to Cloud Foundry
         run: |
